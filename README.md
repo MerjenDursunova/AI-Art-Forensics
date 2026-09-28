@@ -67,7 +67,7 @@ CLIP ViT-B/32 image encoder
 	+--> FGSM / PGD evaluation --> robustness analysis
 ```
 
-The bundled Streamlit classifier loads `streamlit_app/models/classifier.joblib`. The app's UMAP view loads the 5,000-image reference sample from `streamlit_app/models/umap_embeddings_sample.npy` and `streamlit_app/models/umap_meta_sample.csv`.
+The Streamlit app loads its classifier and UMAP reference data from its local model assets.
 
 ## Research figures
 
@@ -86,10 +86,6 @@ The figures below are the important visual checkpoints for a project report or p
 <!-- Picture placeholder: accuracy across art styles. -->
 
 ![Per-style classification accuracy](figures/07_per_style_accuracy.png)
-
-<!-- Picture placeholder: cross-generator generalisation. -->
-
-![Cross-generator generalisation](figures/08_generalization.png)
 
 ### Explainability
 
@@ -135,11 +131,49 @@ The figures below are the important visual checkpoints for a project report or p
 
 ![Adversarial training comparison](figures/18_adversarial_training.png)
 
+## Example images
+
+<!-- Picture placeholder: loaded application page. -->
+
+![Main page](examples/loaded_page.png)
+
+<!-- Picture placeholder: example image 1. -->
+
+![Example image 1](examples/example_1.png)
+
+<!-- Picture placeholder: example image 1, variation 2. -->
+
+![Example image 1, variation 2](<examples/example_1(2).png>)
+
+<!-- Picture placeholder: example image 1, variation 3. -->
+
+![Example image 1, variation 3](<examples/example_1(3).png>)
+
+<!-- Picture placeholder: example image 1, variation 4. -->
+
+![Example image 1, variation 4](<examples/example_1(4).png>)
+
+<!-- Picture placeholder: example image 2. -->
+
+![Example image 2](examples/example_2.png)
+
+<!-- Picture placeholder: example image 2, variation 2. -->
+
+![Example image 2, variation 2](<examples/example_2(2).png>)
+
+<!-- Picture placeholder: example image 2, variation 3. -->
+
+![Example image 2, variation 3](<examples/example_2(3).png>)
+
+<!-- Picture placeholder: example image 2, variation 4. -->
+
+![Example image 2, variation 4](<examples/example_2(4).png>)
+
 ## Repository map
 
 ```text
 .
-|-- dataset_manifest.csv                 # 185,015-image manifest
+|-- examples/                            # example images and app screenshot
 |-- figures/                             # exported research figures
 |-- notebooks/
 |   |-- exploratory-data-analysis.ipynb  # dataset construction and EDA
@@ -148,34 +182,16 @@ The figures below are the important visual checkpoints for a project report or p
 |   |-- explainability.ipynb             # saliency and dimension probes
 |   `-- adversarial-robustness.ipynb     # FGSM, PGD, and robust training
 |-- streamlit_app/
-|   |-- app.py                           # interactive demo
-|   `-- models/                          # classifier, embeddings, metadata
+|   `-- app.py                           # interactive demo
 |-- outputs/                             # reserved for generated outputs
 `-- requirements.txt                     # dependency manifest
 ```
 
-`src/` and `outputs/` are currently empty. The repository also contains a local `streamlit_app/venv/`; it is an environment directory rather than project source and is intentionally omitted from the map above.
+`src/` and `outputs/` are currently empty. Local environments and generated model assets are omitted from the map above.
 
 ## Data and artifacts
 
-The manifest contains 185,015 records with these fields:
-
-| Field      | Description                                          |
-| ---------- | ---------------------------------------------------- |
-| `path`     | Original image path used during notebook execution   |
-| `split`    | `train` or `test`                                    |
-| `source`   | `human`, `latent_diffusion`, or `standard_diffusion` |
-| `style`    | One of 10 art styles                                 |
-| `label`    | `0` for human, `1` for AI                            |
-| `filename` | Original image filename                              |
-
-The original image dataset is referenced through external `/kaggle/input/...` paths in the manifests; the source image collection itself is not included here. The repository does include the derived embedding and classifier artifacts used by the demo:
-
-- `embeddings.npy`: shape `(185015, 512)`;
-- `metadata.csv`: embedding metadata and source labels;
-- `classifier.joblib`: scikit-learn logistic-regression probe;
-- `umap_embeddings_sample.npy`: shape `(5000, 512)`;
-- `umap_meta_sample.csv`: metadata for the UMAP reference sample.
+The source image collection is external to this repository. The notebooks may require updating dataset and output paths for the local environment, and the Streamlit app uses local model assets.
 
 ## Notebooks
 
