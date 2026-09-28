@@ -1,0 +1,27 @@
+cat > ~/Desktop/ai-art-forensics/.gitignore << 'EOF'
+
+streamlit_app/venv/
+
+
+streamlit_app/models/embeddings.npy
+streamlit_app/models/metadata.csv
+streamlit_app/models/umap_embeddings_sample.npy
+streamlit_app/models/umap_meta_sample.csv
+streamlit_app/models/classifier.joblib
+dataset_manifest.csv
+
+
+~/.cache/clip/
+
+
+__pycache__/
+*.pyc
+*.pyo
+.DS_Store
+
+
+.ipynb_checkpoints/
+
+
+*.zip
+EOF
